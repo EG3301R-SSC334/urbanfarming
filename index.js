@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.use(express.json({ limit: '5mb' }));
 
-app.all('/dishes', (req, res, next) => {
+app.all('/data', (req, res, next) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     next();
@@ -20,7 +20,7 @@ app.all('/dishes', (req, res, next) => {
 
 var sample = require('./public/sample.json');
 
-app.get('/dishes', (req,res,next) => {
+app.get('/data', (req,res,next) => {
     res.json(sample);
 })
 
