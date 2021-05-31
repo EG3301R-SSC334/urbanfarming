@@ -1,0 +1,25 @@
+{
+  "name": "urbanfarming",
+  "version": "1.0.0",
+  "description": "EG3301R Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danikrisdayadi/urbanfarming.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danikrisdayadi/urbanfarming/issues"
+  },
+  "homepage": "https://github.com/danikrisdayadi/urbanfarming#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "morgan": "^1.10.0"
+  }
+}
