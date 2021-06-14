@@ -8,8 +8,12 @@ const app = express();
 const plantRouter = require('./routes/unitRouter');
 const mongoose = require('mongoose')
 const Plants = require('./models/unit')
-const url = 'mongodb://localhost:27017/conFusion';
-const connect = mongoose.connect(url);
+const url = 'mongodb://localhost:27017/urbanFarming';
+const connect = mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
 
 connect.then((db) => {
     console.log("Connected correctly to server");
