@@ -25,8 +25,6 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json({ limit: '5mb' }));
 app.use('/plants', plantRouter);
 
-const server = http.createServer(app);
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(process.env.port || 3000, () => {
+  console.log(`Server running...`)
 });
