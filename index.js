@@ -1,15 +1,18 @@
+const dotenv = require('dotenv');
+const path = require('path')
+dotenv.config({ path: path.resolve(__dirname, './.env') });
+
 const express = require('express'),
      http = require('http');
 
-const hostname = 'localhost';
-const port = 3000;
 const morgan = require('morgan');
 const app = express();
 const plantRouter = require('./routes/unitRouter');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 const Plants = require('./models/unit')
-const url = 'mongodb://localhost:27017/urbanFarming';
-const connect = mongoose.connect(url, {
+const connect = mongoose.connect(
+    process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -20,8 +23,6 @@ connect.then((db) => {
 }, (err) => { console.log(err); });
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '/public'))
-
 app.use(express.json({ limit: '5mb' }));
 app.use('/plants', plantRouter);
 
