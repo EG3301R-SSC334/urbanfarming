@@ -1,13 +1,13 @@
 const express = require('express'),
      http = require('http');
-     
+
 const hostname = 'localhost';
 const port = 3000;
 const morgan = require('morgan');
 const app = express();
-const dishRouter = require('./routes/dishRouter');
+const plantRouter = require('./routes/unitRouter');
 const mongoose = require('mongoose')
-const Dishes = require('./models/sample')
+const Plants = require('./models/unit')
 const url = 'mongodb://localhost:27017/conFusion';
 const connect = mongoose.connect(url);
 
@@ -19,7 +19,7 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'))
 
 app.use(express.json({ limit: '5mb' }));
-app.use('/dishes', dishRouter);
+app.use('/plants', plantRouter);
 
 const server = http.createServer(app);
 

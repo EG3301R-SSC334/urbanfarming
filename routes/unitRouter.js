@@ -2,38 +2,33 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
-const dishRouter = express.Router();
-const Dishes = require('../models/sample');
+const unitRouter = express.Router();
+const Plants = require('../models/unit');
 
-dishRouter.use(bodyParser.json());
-const sample = require('../public/sample.json');
+unitRouter.use(bodyParser.json());
 
-dishRouter.route('/')
+unitRouter.route('/')
 .get((req,res,next) => {
-    Dishes.find({})
-    .then((dishes) => {
+    Plants.find({})
+    .then((plants) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dishes);
+        res.json(plants);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req, res, next) => {
-    Dishes.create(req.body)
-    .then((dish) => {
-        console.log('Dish Created ', dish);
+    Plants.create(req.body)
+    .then((plant) => {
+        console.log('Plant Created ', plant);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(plant);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.put((req, res, next) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /dishes');
-})
 .delete((req, res, next) => {
-    Dishes.remove({})
+    Plants.remove({})
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -42,4 +37,4 @@ dishRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = dishRouter;
+module.exports = unitRouter;
