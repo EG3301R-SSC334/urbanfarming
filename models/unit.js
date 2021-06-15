@@ -16,7 +16,7 @@ const plantSchema = new Schema({
         required: true
     },
     temperature: {
-        type: Number,
+        type: [Number],
         required: true
     },
     pH: {
