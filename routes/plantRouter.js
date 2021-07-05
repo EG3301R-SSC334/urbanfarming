@@ -2,12 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
-const unitRouter = express.Router();
-const Plants = require('../models/unit');
+const plantRouter = express.Router();
+const Plants = require('../models/plantSchema');
 
-unitRouter.use(bodyParser.json());
-
-unitRouter.route('/')
+plantRouter.route('/')
 .get((req,res,next) => {
     Plants.find({})
     .then((plants) => {
@@ -49,4 +47,4 @@ unitRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = unitRouter;
+module.exports = plantRouter;

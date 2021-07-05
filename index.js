@@ -7,7 +7,7 @@ const express = require('express'),
 
 const morgan = require('morgan');
 const app = express();
-const plantRouter = require('./routes/unitRouter');
+const plantRouter = require('./routes/plantRouter');
 const mongoose = require('mongoose');
 
 const Plants = require('./models/unit')
@@ -25,6 +25,7 @@ connect.then((db) => {
 app.use(morgan('dev'));
 app.use(express.json({ limit: '5mb' }));
 app.use('/plants', plantRouter);
+app.use('/users', plantRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running...`)
