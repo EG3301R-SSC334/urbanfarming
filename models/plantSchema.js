@@ -21,7 +21,7 @@ const plantSchema = new Schema({
     },
     pH: {
         type: [Number],
-        required: true
+        required: true 
     },
     EC: {
         type: [Number],
@@ -31,6 +31,6 @@ const plantSchema = new Schema({
     timestamps: true
 });
 
-var Plants = mongoose.model('plant', plantSchema);
+// var Plants = mongoose.model('plant', plantSchema);
 
-module.exports = Plants;
+module.exports = plantSchema;

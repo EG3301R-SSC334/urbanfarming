@@ -1,5 +1,8 @@
-require('mongoose');
-const Schema = mongoose.Schema;
+// import { Schema } from 'mongoose'
+// import { plantSchema } from './plantSchema';
+const plantSchema = require('./plantSchema')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     username: {
@@ -22,13 +25,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    plants: {
-        type: [Plants]
-    }
+    plants: [plantSchema]
 },{
     timestamps: true
 });
 
-var Users = mongoose.model('user', userSchema);
+var Users = mongoose.model('User', userSchema);
 
 module.exports = Users;

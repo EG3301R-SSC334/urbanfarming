@@ -1,12 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose');
+const userRouter = express.Router();
+const Users = require('../models/userSchema');
 
-const plantRouter = express.Router();
-
-plantRouter.route('/')
+userRouter.route('/')
 .get((req,res,next) => {
-    Plants.find({})
+    Users.find({})
     .then((plants) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -15,9 +13,9 @@ plantRouter.route('/')
     .catch((err) => next(err));
 })
 .post((req, res, next) => {
-    Plants.create(req.body)
-    .then((plant) => {
-        console.log('Plant Created ', plant);
+    Users.create(req.body)
+    .then((user) => {
+        console.log('Plant Created ', user);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(plant);
@@ -25,7 +23,7 @@ plantRouter.route('/')
     .catch((err) => next(err));
 })
 .put((req, res, next) => {
-    Plants.findByIdAndUpdate(req.body._id, {
+    Users.findByIdAndUpdate(req.body._id, {
         $push: { temperature: req.body.temperature }
     }, { new: true })
     .then((plant) => {
@@ -46,4 +44,4 @@ plantRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = plantRouter;
+module.exports = userRouter;
