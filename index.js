@@ -25,7 +25,6 @@ const userRouter = require('./routes/userRouter');
 
 app.use(morgan('dev'));
 app.use(express.json({ limit: '5mb' }));
-app.use('/plants', plantRouter);
 app.use('/users', userRouter);
 
 app.listen(process.env.PORT || 3000, () => {

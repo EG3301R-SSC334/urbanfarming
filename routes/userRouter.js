@@ -5,10 +5,10 @@ const Users = require('../models/userSchema');
 userRouter.route('/')
 .get((req,res,next) => {
     Users.find({})
-    .then((plants) => {
+    .then((users) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(plants);
+        res.json(users);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
@@ -18,7 +18,7 @@ userRouter.route('/')
         console.log('Plant Created ', user);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(plant);
+        res.json(user);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
