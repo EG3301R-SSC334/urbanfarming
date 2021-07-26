@@ -11,6 +11,10 @@ const systemSchema = new Schema({
     systemName: {
         type: String,
     },
+    ownerID: {
+        type: String,
+        unique: true
+    },
     plantType: {
         type: String,
         required: true

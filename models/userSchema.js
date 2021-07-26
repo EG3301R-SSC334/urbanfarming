@@ -23,11 +23,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    systems: [systemSchema]
+    systems: {
+        type: String
+    }
 },{
     timestamps: true
 });
-
-// var Users = mongoose.model('User', userSchema);
 
 export default userSchema;
