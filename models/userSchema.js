@@ -1,9 +1,7 @@
-// import { Schema } from 'mongoose'
-// import { plantSchema } from './plantSchema';
-const systemSchema = require('./systemSchema')
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose'
+import systemSchema from './systemSchema.js';
 
+const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
@@ -30,6 +28,6 @@ const userSchema = new Schema({
     timestamps: true
 });
 
-var Users = mongoose.model('User', userSchema);
+// var Users = mongoose.model('User', userSchema);
 
-module.exports = Users;
+export default userSchema;

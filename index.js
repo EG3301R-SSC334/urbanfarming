@@ -4,11 +4,9 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import path from 'path';
 import logger from 'morgan';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import systemRouter from './routes/systemRouter.js';
+import userRouter from './routes/userRouter.js';
 
-// import systemRouter from './routes/systemRouter';
-// import userRouter from './routes/userRouter';
 const __dirname = path.resolve();
 
 dotenv.config({ path: path.resolve(__dirname, './.env') });
@@ -18,8 +16,8 @@ app.use(logger('dev'));
 app.use(express.json({ limit: '5mb' }));
 
 // Declare Routes
-// app.use('/users', userRouter);
-// app.use('/systems', systemRouter);
+app.use('/users', userRouter);
+app.use('/systems', systemRouter);
 
 const connect = mongoose.connect(
     process.env.DB_URL, {

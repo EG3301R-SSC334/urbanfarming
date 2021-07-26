@@ -1,4 +1,4 @@
-export const registerUser = (req, res, next) => {
+export const getAllUsers = (req, res, next) => {
     Users.find({})
     .then((users) => {
         res.statusCode = 200;

@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const systemRouter = express.Router();
 
@@ -44,4 +44,4 @@ systemRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = systemRouter;
+export default systemRouter;

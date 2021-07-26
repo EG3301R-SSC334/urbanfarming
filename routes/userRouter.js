@@ -1,8 +1,7 @@
-import getAllUsers from '../controllers/userController';
-const express = require('express');
+import {getAllUsers} from '../controllers/userController.js';
+import express from 'express';
+import Users from '../models/userSchema.js'
 const userRouter = express.Router();
-
-const Users = require('../models/userSchema');
 
 userRouter.route('/')
 .get(getAllUsers)
@@ -38,4 +37,4 @@ userRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = userRouter;
+export default userRouter;

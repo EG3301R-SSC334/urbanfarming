@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const systemSchema = new Schema({
@@ -34,4 +35,4 @@ const systemSchema = new Schema({
     timestamps: true
 });
 
-module.exports = systemSchema;
+export default systemSchema;
