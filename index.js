@@ -1,13 +1,25 @@
-const dotenv = require('dotenv');
-const path = require('path')
+import express from 'express';
+import http from 'http';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import path from 'path';
+import logger from 'morgan';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// import systemRouter from './routes/systemRouter';
+// import userRouter from './routes/userRouter';
+const __dirname = path.resolve();
+
 dotenv.config({ path: path.resolve(__dirname, './.env') });
 
-const express = require('express'),
-     http = require('http');
-
-const morgan = require('morgan');
 const app = express();
-const mongoose = require('mongoose');
+app.use(logger('dev'));
+app.use(express.json({ limit: '5mb' }));
+
+// Declare Routes
+// app.use('/users', userRouter);
+// app.use('/systems', systemRouter);
 
 const connect = mongoose.connect(
     process.env.DB_URL, {
@@ -19,16 +31,6 @@ const connect = mongoose.connect(
 connect.then((db) => {
     console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
-
-const systemRouter = require('./routes/systemRouter');
-const userRouter = require('./routes/userRouter');
-
-app.use(morgan('dev'));
-app.use(express.json({ limit: '5mb' }));
-
-// Declare Routes
-app.use('/users', userRouter);
-app.use('/systems', systemRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running...`)

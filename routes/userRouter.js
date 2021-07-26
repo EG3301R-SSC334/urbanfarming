@@ -1,17 +1,11 @@
+import getAllUsers from '../controllers/userController';
 const express = require('express');
 const userRouter = express.Router();
+
 const Users = require('../models/userSchema');
 
 userRouter.route('/')
-.get((req,res,next) => {
-    Users.find({})
-    .then((users) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(users);
-    }, (err) => next(err))
-    .catch((err) => next(err));
-})
+.get(getAllUsers)
 .post((req, res, next) => {
     Users.create(req.body)
     .then((user) => {
