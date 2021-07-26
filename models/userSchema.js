@@ -1,6 +1,6 @@
 // import { Schema } from 'mongoose'
 // import { plantSchema } from './plantSchema';
-const plantSchema = require('./plantSchema')
+const systemSchema = require('./systemSchema')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -25,7 +25,7 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    plants: [plantSchema]
+    systems: [systemSchema]
 },{
     timestamps: true
 });

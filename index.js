@@ -20,12 +20,15 @@ connect.then((db) => {
     console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
 
-const plantRouter = require('./routes/plantRouter');
+const systemRouter = require('./routes/systemRouter');
 const userRouter = require('./routes/userRouter');
 
 app.use(morgan('dev'));
 app.use(express.json({ limit: '5mb' }));
+
+// Declare Routes
 app.use('/users', userRouter);
+app.use('/systems', systemRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running...`)

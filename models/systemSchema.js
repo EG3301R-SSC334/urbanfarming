@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const plantSchema = new Schema({
-    plantID: {
+const systemSchema = new Schema({
+    systemID: {
         type: String,
         required: true,
         unique: true
+    },
+    systemName: {
+        type: String,
     },
     plantType: {
         type: String,
@@ -31,4 +34,4 @@ const plantSchema = new Schema({
     timestamps: true
 });
 
-module.exports = plantSchema;
+module.exports = systemSchema;

@@ -1,43 +1,41 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose');
 
-const plantRouter = express.Router();
+const systemRouter = express.Router();
 
-plantRouter.route('/')
+systemRouter.route('/')
 .get((req,res,next) => {
-    Plants.find({})
-    .then((plants) => {
+    systems.find({})
+    .then((systems) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(plants);
+        res.json(systems);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req, res, next) => {
-    Plants.create(req.body)
-    .then((plant) => {
-        console.log('Plant Created ', plant);
+    systems.create(req.body)
+    .then((system) => {
+        console.log('system Created ', system);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(plant);
+        res.json(system);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .put((req, res, next) => {
-    Plants.findByIdAndUpdate(req.body._id, {
+    systems.findByIdAndUpdate(req.body._id, {
         $push: { temperature: req.body.temperature }
     }, { new: true })
-    .then((plant) => {
-        console.log('Plant Created ', plant);
+    .then((system) => {
+        console.log('system Created ', system);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(plant);
+        res.json(system);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .delete((req, res, next) => {
-    Plants.remove({})
+    systems.remove({})
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -46,4 +44,4 @@ plantRouter.route('/')
     .catch((err) => next(err));    
 });
 
-module.exports = plantRouter;
+module.exports = systemRouter;
