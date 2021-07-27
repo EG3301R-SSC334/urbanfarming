@@ -1,3 +1,5 @@
+import {Users} from '../models/userSchema.js';
+
 export const getAllUsers = (req, res, next) => {
     Users.find({})
     .then((users) => {

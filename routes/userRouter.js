@@ -1,6 +1,6 @@
 import {getAllUsers} from '../controllers/userController.js';
 import express from 'express';
-import Users from '../models/userSchema.js'
+import {Users} from '../models/userSchema.js'
 const userRouter = express.Router();
 
 userRouter.route('/')
@@ -26,15 +26,6 @@ userRouter.route('/')
         res.json(plant);
     }, (err) => next(err))
     .catch((err) => next(err));
-})
-.delete((req, res, next) => {
-    Plants.remove({})
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp);
-    }, (err) => next(err))
-    .catch((err) => next(err));    
 });
 
 export default userRouter;
