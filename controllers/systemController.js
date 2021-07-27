@@ -44,16 +44,18 @@ export const deleteAlldata = (req, res, next) => {
     .catch((err) => next(err));    
 }
 
-export const getSystemData = (req, res, next) => {
-    console.log(req.params.queryId);
-    Systems.findById(req.params.queryId)
-    .then((system) => {
-        console.log("system get", system)
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(system);
-    }, (err) => next(err))
-    .catch((err) => next(err));
+export async function getSystemData(req, res, next) {
+    try {
+        const foundSystem = await Systems.findById(req.params.queryId);
+        if (foundSystem != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(foundSystem);
+        }
+    } catch (err) {
+        res.statusCode = 404;
+        res.send(err);
+    }
 }
 
 export const deleteSystemData = (req, res, next) => {
