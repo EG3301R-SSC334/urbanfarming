@@ -1,17 +1,11 @@
 import express from 'express';
-import { Systems } from '../models/systemSchema.js'
+import { Systems } from '../models/systemSchema.js';
+import { getAllSystems } from '../controllers/systemController.js';
+
 const systemRouter = express.Router();
 
 systemRouter.route('/')
-.get((req,res,next) => {
-    Systems.find({})
-    .then((Systems) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(Systems);
-    }, (err) => next(err))
-    .catch((err) => next(err));
-})
+.get(getAllSystems)
 .post((req, res, next) => {
     Systems.create(req.body)
     .then((system) => {
