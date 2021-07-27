@@ -39,4 +39,4 @@ const systemSchema = new Schema({
     timestamps: true
 });
 
-export default systemSchema;
+export const Systems = mongoose.model('Systems', systemSchema);

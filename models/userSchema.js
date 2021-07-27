@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import systemSchema from './systemSchema.js';
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
