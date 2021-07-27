@@ -45,12 +45,19 @@ export const deleteAlldata = (req, res, next) => {
 }
 
 export async function getSystemData(req, res, next) {
+    console.log(req.params.queryId)
     try {
-        const foundSystem = await Systems.findById(req.params.queryId);
-        if (foundSystem != null) {
+        const selectedSystem = await Systems.findById(req.params.queryId);
+        console.log("until here")
+        if (selectedSystem != null) {
+            console.log("until here 2")
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(foundSystem);
+            res.json(selectedSystem);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("System not found");
         }
     } catch (err) {
         res.statusCode = 404;
@@ -58,12 +65,20 @@ export async function getSystemData(req, res, next) {
     }
 }
 
-export const deleteSystemData = (req, res, next) => {
-    Systems.remove({})
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp);
-    }, (err) => next(err))
-    .catch((err) => next(err));    
+export async function deleteSystemData (req, res, next) {
+    try {
+        const selectedSystem = await Systems.findOneAndDelete({_id: req.params.queryId});
+        if (selectedSystem != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(selectedSystem);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("System not found");
+        }
+    } catch(err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
 }

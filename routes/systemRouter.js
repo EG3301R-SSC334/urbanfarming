@@ -1,4 +1,5 @@
 import express from 'express';
+import asyncHandler from 'express-async-handler';
 import { Systems } from '../models/systemSchema.js';
 import { createNewSystem, deleteSystemData, getAllData, deleteAlldata, getSystemData, updateSystemData } from '../controllers/systemController.js';
 
@@ -9,13 +10,9 @@ systemRouter.route('/')
 .post(createNewSystem)
 .delete(deleteAlldata);
 
-systemRouter.route('/test')
-.get(getAllData)
-
-
 systemRouter.route('/:queryId')
-.get(getSystemData)
+.get(asyncHandler(getSystemData))
 .put(updateSystemData)
-.delete(deleteSystemData)
+.delete(asyncHandler(deleteSystemData));
 
 export default systemRouter;

@@ -24,6 +24,7 @@
     "body-parser": "^1.18.3",
     "dotenv": "^10.0.0",
     "express": "^4.16.3",
+    "express-async-handler": "^1.1.4",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.12",
     "mongoose-currency": "^0.2.0",
