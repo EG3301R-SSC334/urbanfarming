@@ -21,17 +21,26 @@ export const createNewSystem = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const updateSystemData = (req, res, next) => {
-    Systems.findByIdAndUpdate(req.body._id, {
-        $push: { temperature: req.body.temperature }
-    }, { new: true })
-    .then((system) => {
-        console.log('System updated ', system);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(system);
-    }, (err) => next(err))
-    .catch((err) => next(err));
+export async function updateSystemData (req, res, next) {
+    try {
+        console.log(req.params.queryId)
+        const selectedSystem = await Systems.findByIdAndUpdate(req.params.queryId, {
+            $push: { temperature: req.body.temperature }
+        }, { new: true });
+        console.log(selectedSystem)
+        if (selectedSystem != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(selectedSystem);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("System not found");
+        }
+    } catch (err) {
+        res.statusCode = 404;
+        res.send(err);
+    }
 }
 
 export const deleteAlldata = (req, res, next) => {
@@ -45,12 +54,9 @@ export const deleteAlldata = (req, res, next) => {
 }
 
 export async function getSystemData(req, res, next) {
-    console.log(req.params.queryId)
     try {
         const selectedSystem = await Systems.findById(req.params.queryId);
-        console.log("until here")
         if (selectedSystem != null) {
-            console.log("until here 2")
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(selectedSystem);
