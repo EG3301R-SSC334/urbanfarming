@@ -23,12 +23,15 @@ export const createNewSystem = (req, res, next) => {
 
 export async function updateSystemData (req, res, next) {
     try {
-        console.log(req.params.queryId)
         const selectedSystem = await Systems.findByIdAndUpdate(req.params.queryId, {
-            $push: { temperature: req.body.temperature }
+            $push: { 
+                temperature: req.body.temperature, 
+                humidity: req.body.humidity,
+                pH: req.body.pH,
+                EC: req.body.EC 
+            }
         }, { new: true });
-        console.log(selectedSystem)
-        if (selectedSystem != null) {
+            if (selectedSystem != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(selectedSystem);
