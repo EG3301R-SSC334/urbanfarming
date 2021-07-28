@@ -10,7 +10,7 @@ export const getAllData = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const createNewSystem = (req, res, next) => {
+export const addNewSystem = (req, res, next) => {
     Systems.create(req.body)
     .then((system) => {
         console.log('system Created ', system);
