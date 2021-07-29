@@ -46,7 +46,7 @@ export async function updateSystemData (req, res, next) {
     }
 }
 
-export const deleteAlldata = (req, res, next) => {
+export const deleteAllsystems = (req, res, next) => {
     Systems.remove({})
     .then((resp) => {
         res.statusCode = 200;

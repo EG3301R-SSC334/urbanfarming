@@ -1,13 +1,13 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { addNewSystem, deleteSystemData, getAllData, deleteAlldata, getSystemData, updateSystemData } from '../controllers/systemController.js';
+import { addNewSystem, deleteSystemData, getAllData, deleteAllsystems, getSystemData, updateSystemData } from '../controllers/systemController.js';
 
 const systemRouter = express.Router();
 
 systemRouter.route('/')
 .get(getAllData)
 .post(addNewSystem)
-.delete(deleteAlldata);
+.delete(deleteAllsystems);
 
 systemRouter.route('/:queryId')
 .get(asyncHandler(getSystemData))
