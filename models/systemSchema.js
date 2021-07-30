@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { dataSchema } from './dataSchema.js';
 
 const Schema = mongoose.Schema;
 
@@ -19,19 +20,19 @@ const systemSchema = new Schema({
         required: true
     },
     humidity: {
-        type: [Number],
+        type: [dataSchema],
         required: true
     },
     temperature: {
-        type: [Number],
+        type: [dataSchema],
         required: true
     },
     pH: {
-        type: [Number],
+        type: [dataSchema],
         required: true 
     },
     EC: {
-        type: [Number],
+        type: [dataSchema],
         required: true
     }
 },{
