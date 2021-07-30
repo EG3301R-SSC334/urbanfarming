@@ -53,20 +53,27 @@ export async function getUser (req, res, next) {
             res.json("User not found");
         }
     } catch (err) {
-        res.statusCode = 404;
+        res.statusCode = 500;
         res.send(err);
     }
 }
 
-// export async function updateSystemData (req, res, next) {
-//     try {
-//         const user = await Users.findByIdAndUpdate(req.params.queryId, {
-//             $push: { 
-//                 temperature: req.body.temperature, 
-//                 humidity: req.body.humidity,
-//                 pH: req.body.pH,
-//                 EC: req.body.EC 
-//             }
-//         }
-//     }
-// }
+export async function updateUser (req, res, next) {
+    try {
+        const user = await Users.findByIdAndUpdate(req.params.queryId, {
+            $set: req.body
+        }, { new: true })
+        if (user != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("User not found");
+        }
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+}
