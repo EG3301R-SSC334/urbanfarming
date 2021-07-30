@@ -5,7 +5,7 @@ import {Users} from '../models/userSchema.js'
 const userRouter = express.Router();
 
 userRouter.route('/')
-.get(getAllUsers)
+.get(asyncHandler(getAllUsers))
 .post(asyncHandler(addNewUser))
 .delete(asyncHandler(deleteAllUsers))
 
