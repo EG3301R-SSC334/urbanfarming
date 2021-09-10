@@ -25,6 +25,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.16.3",
     "express-async-handler": "^1.1.4",
+    "googleapis": "^84.0.0",
     "mongodb": "^3.6.9",
     "mongoose": "^5.13.3",
     "mongoose-currency": "^0.2.0",

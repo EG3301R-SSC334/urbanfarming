@@ -1,4 +1,4 @@
-import {getAllUsers, addNewUser, deleteAllUsers, getUser, updateUser } from '../controllers/userController.js';
+import {getAllUsers, addNewUser, deleteAllUsers, getUser, updateUser, googleLogin } from '../controllers/userController.js';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import {Users} from '../models/userSchema.js'
@@ -15,4 +15,6 @@ userRouter.route('/:queryId')
 .post(asyncHandler(addNewUser))
 .delete(asyncHandler(deleteAllUsers))
 
+userRouter.route('/googleauth')
+.post(asyncHandler(googleLogin))
 export default userRouter;
