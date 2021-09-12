@@ -1,11 +1,13 @@
-import {getAllUsers, addNewUser, deleteAllUsers, getUser, updateUser, googleLogin } from '../controllers/userController.js';
+import {getAllUsers, 
+    addNewUser, 
+    deleteAllUsers, 
+    getUser, 
+    updateUser, 
+} from '../controllers/userController.js';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import {Users} from '../models/userSchema.js'
-const userRouter = express.Router();
 
-userRouter.route('/googleauth')
-.post(asyncHandler(googleLogin))
+const userRouter = express.Router();
 
 userRouter.route('/')
     .get(asyncHandler(getAllUsers))
