@@ -9,6 +9,7 @@ import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
 import session from 'express-session';
 import passport from 'passport';
+import MongoStore from 'connect-mongo';
 import { ensureAuth, ensureGuest } from './utils/sociallogin.js';
 
 const __dirname = path.resolve();
@@ -23,37 +24,39 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json({ limit: '5mb' }));
 
-// Declare Routes
-app.use('/users', userRouter);
-app.use('/systems', systemRouter);
-app.use('/auth', authRouter);
-
-
-const connect = mongoose.connect(
+mongoose.connect(
     process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 });
 
-connect.then((db) => {
-    console.log("Connected correctly to server");
-}, (err) => { console.log(err); });
+// connect.then((db) => {
+//     console.log("Connected correctly to server");
+// }, (err) => { console.log(err); });
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server running...`)
-});
 
 app.use(express.static('public'))
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended:true}))
 app.use(
     session({
-      secret: 'keyboard cat',
-      resave: false,
-      saveUninitialized: false,
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
     })
-  )
+)
   // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Declare Routes
+app.use('/users', userRouter);
+app.use('/systems', systemRouter);
+app.use('/', authRouter);
+
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running...`)
+});
