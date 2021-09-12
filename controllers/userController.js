@@ -1,5 +1,6 @@
 import {Users} from '../models/userSchema.js';
 import { validateGoogle } from '../utils/sociallogin.js';
+import { getToken } from '../utils/passport.js';
 
 export async function getAllUsers (req, res, next) {
     try {
@@ -127,11 +128,8 @@ export async function updateUser (req, res, next) {
                     const newUser = new Users({
                         username: username,
                         email: profile.email,
-                        firstName: profile.given_name,
-                        lastName: profile.family_name,
-                        socialPicture: img,
+                        profilePicture: img,
                         status: 'Email Confirmed',
-                        loginType: 'google',
                         confirmationCode
                     });
 

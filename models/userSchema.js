@@ -7,11 +7,6 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    userID: {
-        type: String,
-        required: true,
-        unique: true
-    },
     email: {
         type: String,
         required: true,
@@ -21,6 +16,12 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    profilePicture: {
+        type: String
+    },
+    status: {
+        type: String
     },
     systems: {
         type: String

@@ -8,15 +8,14 @@ userRouter.route('/googleauth')
 .post(asyncHandler(googleLogin))
 
 userRouter.route('/')
-.get(asyncHandler(getAllUsers))
-.post(asyncHandler(addNewUser))
-.delete(asyncHandler(deleteAllUsers))
+    .get(asyncHandler(getAllUsers))
+    .post(asyncHandler(addNewUser))
+    .delete(asyncHandler(deleteAllUsers))
 
 userRouter.route('/:queryId')
-.get(asyncHandler(getUser))
-.put(asyncHandler(updateUser))
-.post(asyncHandler(addNewUser))
-.delete(asyncHandler(deleteAllUsers))
+    .get(asyncHandler(getUser))
+    .put(asyncHandler(updateUser))
+    .delete(asyncHandler(deleteAllUsers))
 
 
 export default userRouter;
