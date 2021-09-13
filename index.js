@@ -26,7 +26,7 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json({ limit: '5mb' }));
 
-mongoose.connect(
+const connect = mongoose.connect(
     process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
