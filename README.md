@@ -11,34 +11,40 @@
 ### Developer's Guide
 #### GET Requests
 `GET /users/`
-Returns all the information of all users in the database \
+Returns all the information of all users in the database
+
 `GET/users/:queryId`
-Returns all the information of a user specified by the `_id` \
+Returns all the information of a user specified by the `_id`
 
 `GET /systems/`
-Returns all the information of all systems in the database \
+Returns all the information of all systems in the database
+
 `GET/systems/:queryId`
-Returns all the information of a system specified by the `_id` \
+Returns all the information of a system specified by the `_id`
 
 #### POST Requests
 `POST /users/`
-Creates a new user entry in the database \
+Creates a new user entry in the database
+
 `POST /systems`
 Creates a new system in the database
 
 #### PUT Requests
 `PUT /users/:queryId`
-Modifies entry of a user specified by the `_id` \
+Modifies entry of a user specified by the `_id`
+
 `PUT /systems/:queryId`
 Modifies entry of a system specified by the `_id` 
 
 #### Delete Requests
 `DELETE /users/`
-Deletes the entire user database \
+Deletes the entire user database
+
 `DELETE/users/:queryId`
 Deletes a user specified by the `_id`
 
 `DELETE /systems/`
-Deletes all systems in the database \
+Deletes all systems in the database
+
 `DELETE /systems/:queryId`
 Deletes a system specified by the `_id`
