@@ -1,21 +1,26 @@
-const passport = require("passport")
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
+import passport from "passport";
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
+export const getToken = (user) => {
+    return jwt.sign(user, process.env.PASSPORT_SECRET_KEY, {
+        expiresIn: '14d'
+    });
+};
 
-passport.deserializeUser(function(user, done) {
-        done(null, user);
-});
-
-passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_REDIRECT_URI,
-        passReqToCallback   : true
-    },
-    function(request, accessToken, refreshToken, profile, done) {
-            return done(null, profile);
-    }
-));
+// To verify user credentials using jwt
+export const verifyUser = (req, res, next) => {
+    passport.authenticate(
+        'jwt',
+        { session: false },
+        (err, user) => {
+            if (err || !user) {
+                res.status(403).json({
+                    success: false,
+                    errors: 'You are not authenticated!'
+                });
+            } else {
+                req.user = user;
+                return next();
+            }
+        }
+    )(req, res, next);
+};

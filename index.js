@@ -6,6 +6,7 @@ import path from 'path';
 import logger from 'morgan';
 import systemRouter from './routes/systemRouter.js';
 import userRouter from './routes/userRouter.js';
+import authRouter from './routes/authRouter.js';
 
 const __dirname = path.resolve();
 mongoose.set('useNewUrlParser', true);
@@ -22,6 +23,7 @@ app.use(express.json({ limit: '5mb' }));
 // Declare Routes
 app.use('/users', userRouter);
 app.use('/systems', systemRouter);
+app.use('/auth', authRouter);
 
 const connect = mongoose.connect(
     process.env.DB_URL, {
