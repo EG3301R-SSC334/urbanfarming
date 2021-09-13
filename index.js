@@ -12,6 +12,8 @@ import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import { ensureAuth, ensureGuest } from './utils/sociallogin.js';
 
+// https://tomanagle.medium.com/google-oauth-with-node-js-4bff90180fe6
+// Tutorial for non-passport related use
 const __dirname = path.resolve();
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -31,25 +33,9 @@ mongoose.connect(
     useFindAndModify: false
 });
 
-// connect.then((db) => {
-//     console.log("Connected correctly to server");
-// }, (err) => { console.log(err); });
-
-
-app.use(express.static('public'))
-app.set('view engine','ejs');
-app.use(express.urlencoded({extended:true}))
-app.use(
-    session({
-        secret: 'keyboard cat',
-        resave: false,
-        saveUninitialized: false,
-        store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
-    })
-)
-  // Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
+connect.then((db) => {
+    console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
 
 // Declare Routes
 app.use('/users', userRouter);

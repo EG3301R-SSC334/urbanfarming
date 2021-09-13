@@ -24,10 +24,91 @@ Returns all the information of a system specified by the `_id`
 
 #### POST Requests
 `POST /users/`
-Creates a new user entry in the database
+Creates a new user entry in the database. Structure of users: 
+(Note that all required field must be provided upon POSTing the request)
+
+```
+{
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    token: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    profilePicture: {
+        type: String
+    },
+    status: {
+        type: String
+    },
+    systems: {
+        type: String
+    },
+    _id: {              // _id will be generated automatically by the Database
+        type: String    // and will be given upon the first POST request
+    }
+}
+```
 
 `POST /systems`
 Creates a new system in the database
+
+System's model
+```
+{
+    systemName: {
+        type: String,
+    },
+    ownerID: {
+        type: String
+    },
+    plantType: {
+        type: String,
+        required: true
+    },
+    humidity: {
+        type: [dataSchema],
+        required: true
+    },
+    temperature: {
+        type: [dataSchema],
+        required: true
+    },
+    pH: {
+        type: [dataSchema],
+        required: true 
+    },
+    EC: {
+        type: [dataSchema],
+        required: true
+    },
+    _id: {              // _id will be generated automatically by the Database
+        type: String    // and will be given upon the first POST request
+    }
+}
+```
+Data Schema Model:
+```
+{
+    value: {
+        type: String,
+        required: true,
+    },
+    time: {
+        type: String,
+        required: true,
+    }
+}
+```
 
 #### PUT Requests
 `PUT /users/:queryId`

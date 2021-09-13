@@ -4,11 +4,6 @@ import { dataSchema } from './dataSchema.js';
 const Schema = mongoose.Schema;
 
 const systemSchema = new Schema({
-    systemID: {
-        type: String,
-        required: true,
-        unique: true
-    },
     systemName: {
         type: String,
     },
