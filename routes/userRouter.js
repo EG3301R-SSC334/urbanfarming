@@ -6,6 +6,7 @@ import {getAllUsers,
 } from '../controllers/userController.js';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import { verifyUser } from '../utils/passport.js';
 
 const userRouter = express.Router();
 
@@ -15,9 +16,9 @@ userRouter.route('/')
     .delete(asyncHandler(deleteAllUsers))
 
 userRouter.route('/:queryId')
-    .get(asyncHandler(getUser))
-    .put(asyncHandler(updateUser))
-    .delete(asyncHandler(deleteAllUsers))
+    .get(verifyUser, asyncHandler(getUser))
+    .put(verifyUser, asyncHandler(updateUser))
+    .delete(verifyUser, asyncHandler(deleteAllUsers))
 
 
 export default userRouter;
