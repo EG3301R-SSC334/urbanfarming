@@ -17,7 +17,7 @@ export async function googleLogin (req, res , next) {
         res.setHeader('Content-Type', 'application/json');
         res.json({
             success: true,
-            bearerToken: 'Bearer ' + token,
+            bearerToken: token,
             message: 'You are successfully logged in!',
             user: user
         });
@@ -27,7 +27,8 @@ export async function googleLogin (req, res , next) {
             if (createNewUser != null) {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json(users);
+                createNewUser.bearerToken = token; // add the bearer token
+                res.json(createNewUser);
             } 
         } catch (err) {
             res.statusCode = 400;
