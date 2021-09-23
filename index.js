@@ -10,10 +10,10 @@ import authRouter from './routes/authRouter.js';
 
 const __dirname = path.resolve();
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useUnifiedTopology', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
 
 dotenv.config({ path: path.resolve(__dirname, './.env') });
 
