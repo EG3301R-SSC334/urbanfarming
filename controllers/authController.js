@@ -9,9 +9,9 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 export async function googleLogin (req, res , next) {
-    console.log("req: " + JSON.stringify(req))
-    console.log("res: " + JSON.stringify(res))
-    console.log("req body: " + JSON.stringify(req.body))
+    console.log("req: " + req)
+    console.log("res: " + res)
+    console.log("req body: " + Object.keys(req.body).length)
     console.log("req headers: " + JSON.stringify(req.headers))
     console.log("req body username: " + req.body.username)
     console.log("req body email: " + req.body.email)
