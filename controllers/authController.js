@@ -11,39 +11,46 @@ const oauth2Client = new google.auth.OAuth2(
 export async function googleLogin (req, res , next) {
     const input = req.body.token;
     console.log(input)
-    const googleUser = await getGoogleUser({ code: input });
-
-    const user = await Users.findOne({ email: String(googleUser.id) });
-    const token = getToken({
-        email: googleUser.email,
-        username: googleUser.username
-    });
-
-    console.log(googleUser);
-    if (user != null) {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({
-            success: true,
-            bearerToken: token,
-            message: 'You are successfully logged in!',
-            user: user
+    let googleUser;
+    try {
+        googleUser = await getGoogleUser({ code: input });
+        console.log(googleUser)
+    
+        const user = await Users.findOne({ email: String(googleUser.id) });
+        const token = getToken({
+            email: googleUser.email,
+            username: googleUser.username
         });
-    } else {
-        try {
-            const createNewUser = await Users.create(req.body);
-            if (createNewUser != null) {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                createNewUser.bearerToken = token; // add the bearer token
-                res.json(createNewUser);
-            } 
-        } catch (err) {
-            res.statusCode = 400;
-            res.send(err);
+
+        console.log(googleUser);
+        if (user != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({
+                success: true,
+                bearerToken: token,
+                message: 'You are successfully logged in!',
+                user: user
+            });
+        } else {
+            try {
+                const createNewUser = await Users.create(req.body);
+                if (createNewUser != null) {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    createNewUser.bearerToken = token; // add the bearer token
+                    res.json(createNewUser);
+                } 
+            } catch (err) {
+                res.statusCode = 400;
+                res.send(err);
+            }
         }
+
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
     }
-    return user;
   }
 
 async function getGoogleUser({ code }) {
@@ -60,8 +67,9 @@ async function getGoogleUser({ code }) {
         },
         )
         .then(res => res.data)
-        .catch(error => {
-            throw new Error(error.message);
+        .catch(err => {
+            res.statusCode = 400;
+            res.send(err);
         });
 
     return googleUser;
