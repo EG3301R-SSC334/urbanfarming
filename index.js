@@ -9,6 +9,7 @@ import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
 
 const __dirname = path.resolve();
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
@@ -39,3 +40,4 @@ connect.then((db) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server running...`)
 });
+

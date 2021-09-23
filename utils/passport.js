@@ -5,13 +5,12 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import path, { dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.resolve();
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 
 export const getToken = (user) => {
     return jwt.sign(user, process.env.PASSPORT_SECRET_KEY, {
