@@ -1,6 +1,6 @@
 import { Systems } from '../models/systemSchema.js'
 
-export const getAllData = (req, res, next) => {
+export async function getAllData (req, res, next) {
     Systems.find({})
     .then((system) => {
         res.statusCode = 200;
@@ -10,7 +10,7 @@ export const getAllData = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const addNewSystem = (req, res, next) => {
+export async function addNewSystem (req, res, next) {
     Systems.create(req.body)
     .then((system) => {
         console.log('system Created ', system);
@@ -46,7 +46,7 @@ export async function updateSystemData (req, res, next) {
     }
 }
 
-export const deleteAllsystems = (req, res, next) => {
+export async function deleteAllsystems (req, res, next) {
     Systems.remove({})
     .then((resp) => {
         res.statusCode = 200;

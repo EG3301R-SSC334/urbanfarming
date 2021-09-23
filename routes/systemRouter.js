@@ -5,9 +5,9 @@ import { addNewSystem, deleteSystemData, getAllData, deleteAllsystems, getSystem
 const systemRouter = express.Router();
 
 systemRouter.route('/')
-.get(getAllData)
-.post(addNewSystem)
-.delete(deleteAllsystems);
+.get(asyncHandler(getAllData))
+.post(asyncHandler(addNewSystem))
+.delete(asyncHandler(deleteAllsystems));
 
 systemRouter.route('/:queryId')
 .get(asyncHandler(getSystemData))
