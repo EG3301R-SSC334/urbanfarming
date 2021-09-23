@@ -9,20 +9,21 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 export async function googleLogin (req, res , next) {
+    console.log("req: " + req)
     const input = req.body.token;
-    console.log(input)
+    console.log("input: " + input)
     let googleUser;
     try {
         googleUser = await getGoogleUser({ code: input });
-        console.log(googleUser)
+        console.log("googleuser: " + googleUser)
     
         const user = await Users.findOne({ email: String(googleUser.id) });
+        console.log("user: " + user)
         const token = getToken({
             email: googleUser.email,
             username: googleUser.username
         });
-
-        console.log(googleUser);
+        console.log("token: " + token)
         if (user != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -48,7 +49,8 @@ export async function googleLogin (req, res , next) {
         }
 
     } catch (err) {
-        res.statusCode = 500;
+        console.log(err);
+        res.statusCode = 400;
         res.send(err);
     }
   }
