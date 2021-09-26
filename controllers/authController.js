@@ -41,8 +41,11 @@ export async function googleLogin (req, res , next) {
             });
         } else {
             try {
-                const createNewUser = await Users.create(req.body);
                 console.log("============================================CREATE NEW USER============================================")
+                delete body.id_token;
+                delete body.access_token;
+                const createNewUser = await Users.create(body);
+
                 console.log(createNewUser)
                 if (createNewUser != null) {
                     res.statusCode = 200;
@@ -70,10 +73,9 @@ export async function googleLogin (req, res , next) {
   }
 
 async function getGoogleUser(id_token, access_token) {
-    console.log("============================================TOKENS ARE NOT OBTAINED============================================")
     // console.log(code)
     // const { tokens } = await oauth2Client.getToken(code);
-    console.log("============================================TOKENS ARE OBTAINED ALREADY============================================")
+    console.log("============================================OBTAINING TOKEN============================================")
     // tokens.access_token = code
     // print(access_token)
 
@@ -92,10 +94,9 @@ async function getGoogleUser(id_token, access_token) {
             res.statusCode = 400;
             res.send(err);
         });
-        console.log("============================================GOOGLE USER============================================")
-
         console.log(googleUser)
-        console.log("============================================TOKENS SENT============================================")
+    console.log("============================================GET USER SUCCESSFULLY============================================")
+
     return googleUser;
 }
   
