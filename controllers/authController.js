@@ -10,14 +10,7 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 export async function googleLogin (req, res , next) {
-    // console.log("req: " + req)
-    // console.log("res: " + res)
-    // console.log("req body: " + Object.keys(req.body).length)
-    // console.log("req headers: " + JSON.stringify(req.headers))
-    // console.log("req body username: " + req.body.username)
-    // console.log("req body email: " + req.body.email)
     const body = req.body;
-    // console.log("input: \n" + input)
     let googleUser;
     try {
         googleUser = await getGoogleUser(body.id_token, body.access_token);
@@ -26,15 +19,14 @@ export async function googleLogin (req, res , next) {
             res.send("Invalid token or users")
             return
         }
-        console.log("============================================GOOGLEUSER: " + googleUser)
+        // console.log("============================================GOOGLEUSER: " + googleUser)
     
         const user = await Users.findOne({ email: String(googleUser.email) });
-        console.log("user: " + user)
         const token = getToken({
             email: googleUser.email,
             username: googleUser.username
         });
-        console.log("token: " + token)
+        // console.log("token: " + token)
         if (user != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -46,20 +38,15 @@ export async function googleLogin (req, res , next) {
             });
         } else {
             try {
-                console.log("============================================CREATE NEW USER============================================")
+                // console.log("============================================CREATE NEW USER============================================")
                 delete body.id_token;
                 delete body.access_token;
-                console.log(body)
                 const createNewUser = await Users.create(body);
-                console.log("============================================CREATED NEW USER============================================")
-                console.log(createNewUser)
+                // console.log("============================================CREATED NEW USER============================================")
+                // console.log(createNewUser)
                 if (createNewUser != null) {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
-                    console.log({
-                        bearerToken: 'Bearer ' + token,
-                        user: createNewUser
-                    });
                     res.json({
                         bearerToken: token,
                         user: createNewUser
@@ -81,7 +68,7 @@ export async function googleLogin (req, res , next) {
 async function getGoogleUser(id_token, access_token) {
     // console.log(code)
     // const { tokens } = await oauth2Client.getToken(code);
-    console.log("============================================OBTAINING TOKEN============================================")
+    // console.log("============================================OBTAINING TOKEN============================================")
     // tokens.access_token = code
     // print(access_token)
 
@@ -99,8 +86,6 @@ async function getGoogleUser(id_token, access_token) {
         .catch(error => {
             return null;
         });
-        console.log(googleUser)
-    console.log("============================================GET USER SUCCESSFULLY============================================")
 
     return googleUser;
 }
