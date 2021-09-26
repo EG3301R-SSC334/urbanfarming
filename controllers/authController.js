@@ -49,8 +49,9 @@ export async function googleLogin (req, res , next) {
                 console.log("============================================CREATE NEW USER============================================")
                 delete body.id_token;
                 delete body.access_token;
+                console.log(body)
                 const createNewUser = await Users.create(body);
-
+                console.log("============================================CREATED NEW USER============================================")
                 console.log(createNewUser)
                 if (createNewUser != null) {
                     res.statusCode = 200;
