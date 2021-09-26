@@ -21,6 +21,11 @@ export async function googleLogin (req, res , next) {
     let googleUser;
     try {
         googleUser = await getGoogleUser(body.id_token, body.access_token);
+        if (googleUser == null) {
+            res.statusCode = 400;
+            res.send("Invalid token or users")
+            return
+        }
         console.log("============================================GOOGLEUSER: " + googleUser)
     
         const user = await Users.findOne({ email: String(googleUser.id) });
@@ -90,9 +95,8 @@ async function getGoogleUser(id_token, access_token) {
         },
         )
         .then(res => res.data)
-        .catch(err => {
-            res.statusCode = 400;
-            res.send(err);
+        .catch(error => {
+            return null;
         });
         console.log(googleUser)
     console.log("============================================GET USER SUCCESSFULLY============================================")
