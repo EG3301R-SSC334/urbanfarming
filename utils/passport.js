@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {Users} from '../models/userSchema.js';
 
 const __dirname = path.resolve();
 
@@ -48,7 +49,7 @@ opts.secretOrKey = process.env.PASSPORT_SECRET_KEY;
 export const jwtPassport = passport.use(
     // TODO: types for jwt_payload and done
     new JwtStrategy(opts, (jwt_payload, done) => {
-        Users.findById(jwt_payload._id)
+        Users.findOne({ email: String(googleUser.id) })
             .then((user) => {
                 if (user) {
                     // User successfully authenticated
