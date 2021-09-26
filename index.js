@@ -4,9 +4,11 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import path from 'path';
 import logger from 'morgan';
+import passport from 'passport';
 import systemRouter from './routes/systemRouter.js';
 import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
+import { jwtPassport } from './utils/passport.js';
 
 const __dirname = path.resolve();
 
@@ -20,6 +22,12 @@ dotenv.config({ path: path.resolve(__dirname, './.env') });
 const app = express();
 app.use(logger('dev'));
 app.use(express.json({ limit: '5mb' }));
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+jwtPassport;
 
 // Declare Routes
 app.use('/users', userRouter);
