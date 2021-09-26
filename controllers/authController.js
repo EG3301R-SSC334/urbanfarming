@@ -57,7 +57,7 @@ export async function googleLogin (req, res , next) {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
                     console.log({
-                        bearerToken: token,
+                        bearerToken: 'Bearer ' + token,
                         user: createNewUser
                     });
                     res.json({
