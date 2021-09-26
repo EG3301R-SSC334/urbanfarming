@@ -28,7 +28,7 @@ export async function googleLogin (req, res , next) {
         }
         console.log("============================================GOOGLEUSER: " + googleUser)
     
-        const user = await Users.findOne({ email: String(googleUser.id) });
+        const user = await Users.findOne({ email: String(googleUser.email) });
         console.log("user: " + user)
         const token = getToken({
             email: googleUser.email,

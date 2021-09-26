@@ -21,10 +21,13 @@ export const getToken = (user) => {
 
 // To verify user credentials using jwt
 export const verifyUser = (req, res, next) => {
+    console.log(req.body);
     passport.authenticate(
         'jwt',
         { session: false },
         (err, user) => {
+            console.log(err);
+            console.log(user);
             if (err || !user) {
                 res.status(403).json({
                     success: false,
@@ -49,7 +52,7 @@ opts.secretOrKey = process.env.PASSPORT_SECRET_KEY;
 export const jwtPassport = passport.use(
     // TODO: types for jwt_payload and done
     new JwtStrategy(opts, (jwt_payload, done) => {
-        Users.findOne({ email: String(googleUser.id) })
+        Users.findOne({ email: String(jwt_payload.email) })
             .then((user) => {
                 if (user) {
                     // User successfully authenticated
