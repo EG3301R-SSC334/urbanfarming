@@ -21,7 +21,7 @@ export async function addNewSystem (req, res, next) {
     .catch((err) => next(err));
 }
 
-export async function updateSystemData (req, res, next) {
+export async function updateSensorData (req, res, next) {
     try {
         const selectedSystem = await Systems.findByIdAndUpdate(req.params.queryId, {
             $push: { 
@@ -31,6 +31,24 @@ export async function updateSystemData (req, res, next) {
                 EC: req.body.EC 
             }
         }, { new: true });
+            if (selectedSystem != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(selectedSystem);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("System not found");
+        }
+    } catch (err) {
+        res.statusCode = 404;
+        res.send(err);
+    }
+}
+
+export async function updateSystemData (req, res, next) {
+    try {
+        const selectedSystem = await Systems.findByIdAndUpdate(req.params.queryId, req.body, { new: true });
             if (selectedSystem != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -82,7 +100,7 @@ export async function getFirstHundredData(req, res, next) {
         selectedSystem.temperature = selectedSystem.temperature.slice(-length);
         selectedSystem.pH = selectedSystem.pH.slice(-length);
         selectedSystem.EC = selectedSystem.EC.slice(-length);
-        
+
         if (selectedSystem != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');

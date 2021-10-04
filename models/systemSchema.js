@@ -10,6 +10,9 @@ const systemSchema = new Schema({
     ownerID: {
         type: String
     },
+    lighting: {
+        type: String
+    },
     plantType: {
         type: String,
         required: true
