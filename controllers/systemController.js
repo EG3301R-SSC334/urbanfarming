@@ -78,11 +78,11 @@ export async function getFirstHundredData(req, res, next) {
     try {
         const selectedSystem = await Systems.findById(req.params.queryId);
         const length = req.params.length;
-        selectedSystem.humidity = selectedSystem.humidity.slice(0, length)
-        selectedSystem.temperature = selectedSystem.temperature.slice(0, length)
-        selectedSystem.pH = selectedSystem.pH.slice(0, length)
-        selectedSystem.EC = selectedSystem.EC.slice(0, length)
-        // console.log(selectedSystem.humidity.slice(0, 1))
+        selectedSystem.humidity = selectedSystem.humidity.slice(-length);
+        selectedSystem.temperature = selectedSystem.temperature.slice(-length);
+        selectedSystem.pH = selectedSystem.pH.slice(-length);
+        selectedSystem.EC = selectedSystem.EC.slice(-length);
+        
         if (selectedSystem != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
