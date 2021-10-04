@@ -74,6 +74,31 @@ export async function getSystemData(req, res, next) {
     }
 }
 
+export async function getFirstHundredData(req, res, next) {
+    try {
+        const selectedSystem = await Systems.findById(req.params.queryId);
+        const length = req.params.length;
+        selectedSystem.humidity = selectedSystem.humidity.slice(0, length)
+        selectedSystem.temperature = selectedSystem.temperature.slice(0, length)
+        selectedSystem.pH = selectedSystem.pH.slice(0, length)
+        selectedSystem.EC = selectedSystem.EC.slice(0, length)
+        // console.log(selectedSystem.humidity.slice(0, 1))
+        if (selectedSystem != null) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(selectedSystem);
+        } else {
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'application/json');
+            res.json("System not found");
+        }
+    } catch (err) {
+        res.statusCode = 404;
+        res.send(err);
+    }
+}
+
+
 export async function deleteSystemData (req, res, next) {
     try {
         const selectedSystem = await Systems.findOneAndDelete({_id: req.params.queryId});
