@@ -28,6 +28,10 @@ const systemSchema = new Schema({
     EC: {
         type: [dataSchema],
         required: true
+    },
+    level: {
+        type: [dataSchema],
+        required: true
     }
 },{
     timestamps: true

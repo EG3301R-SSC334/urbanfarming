@@ -27,7 +27,8 @@ export async function updateSensorData (req, res, next) {
             $push: { 
                 temperature: req.body.temperature, 
                 humidity: req.body.humidity,
-                EC: req.body.EC 
+                EC: req.body.EC,
+                level: req.body.level
             }
         }, { new: true });
             if (selectedSystem != null) {
