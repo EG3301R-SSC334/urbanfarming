@@ -26,7 +26,13 @@ const systemSchema = new Schema({
     EC: {
         type: [dataSchema],
     },
-    level: {
+    waterLevel: {
+        type: [dataSchema],
+    },
+    solutionA: {
+        type: [dataSchema],
+    },
+    solutionB: {
         type: [dataSchema],
     }
 },{
