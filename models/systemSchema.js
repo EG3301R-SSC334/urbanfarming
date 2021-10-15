@@ -11,7 +11,7 @@ const systemSchema = new Schema({
         type: String
     },
     lighting: {
-        type: String
+        type: [Number]
     },
     plantType: {
         type: String,

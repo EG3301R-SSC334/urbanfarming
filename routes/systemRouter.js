@@ -17,7 +17,6 @@ systemRouter.route('/:queryId')
 .put(asyncHandler(updateSystemData))
 .delete(asyncHandler(deleteSystemData));
 
-
 systemRouter.route('/:queryId/:length')
 .get(asyncHandler(getFirstHundredData))
 
