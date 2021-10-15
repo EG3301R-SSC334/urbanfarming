@@ -19,19 +19,15 @@ const systemSchema = new Schema({
     },
     humidity: {
         type: [dataSchema],
-        required: true
     },
     temperature: {
         type: [dataSchema],
-        required: true
     },
     EC: {
         type: [dataSchema],
-        required: true
     },
     level: {
         type: [dataSchema],
-        required: true
     }
 },{
     timestamps: true
