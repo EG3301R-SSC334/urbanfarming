@@ -25,10 +25,6 @@ const systemSchema = new Schema({
         type: [dataSchema],
         required: true
     },
-    pH: {
-        type: [dataSchema],
-        required: true 
-    },
     EC: {
         type: [dataSchema],
         required: true

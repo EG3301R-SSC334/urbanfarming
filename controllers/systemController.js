@@ -27,7 +27,6 @@ export async function updateSensorData (req, res, next) {
             $push: { 
                 temperature: req.body.temperature, 
                 humidity: req.body.humidity,
-                pH: req.body.pH,
                 EC: req.body.EC 
             }
         }, { new: true });
