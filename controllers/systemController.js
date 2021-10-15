@@ -28,7 +28,9 @@ export async function updateSensorData (req, res, next) {
                 temperature: req.body.temperature, 
                 humidity: req.body.humidity,
                 EC: req.body.EC,
-                level: req.body.level
+                waterLevel: req.body.waterLevel,
+                solutionA: req.body.solutionA,
+                solutionB: req.body.solutionB
             }
         }, { new: true });
             if (selectedSystem != null) {
