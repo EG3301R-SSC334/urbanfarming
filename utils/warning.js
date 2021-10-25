@@ -1,14 +1,19 @@
 import axios from 'axios';
 import gcm from 'node-gcm';
+import path from 'path';
+import dotenv from 'dotenv';
 
-export function waterLevelWarning(level) {
-    console.log("water level is decreasing");
+const __dirname = path.resolve();
+dotenv.config({ path: path.resolve(__dirname, './.env') });
+
+export function waterLevelWarning(_id, pushTokens) {
+    // console.log(_id);
+    // console.log(pushTokens);
     var sender = new gcm.Sender(process.env.FCM_SERVER_KEY);
-    const tokensArray = "13123123";
     var gcmMessage = new gcm.Message();
     gcmMessage.addNotification("title", "You have received push notification!");
     gcmMessage.addNotification("body", message);
-    sender.send(gcmMessage, { registrationTokens: tokensArray }, function (
+    sender.send(gcmMessage, { registrationTokens: pushTokens }, function (
         err,
         response
     ) {

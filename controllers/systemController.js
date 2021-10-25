@@ -39,7 +39,8 @@ export async function updateSensorData (req, res, next) {
         if (selectedSystem != null) {
             if (req.body.waterLevel.value < 100) {
                 console.log("water level is high");
-                waterLevelWarning(req.body.waterLevel.value);
+                const owner = await Users.findById(selectedSystem.ownerID);
+                waterLevelWarning(selectedSystem._id, owner.pushToken);
             }
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
