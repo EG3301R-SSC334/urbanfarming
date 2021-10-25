@@ -9,7 +9,7 @@ systemRouter.route('/')
 .post(asyncHandler(addNewSystem))
 .delete(asyncHandler(deleteAllsystems));
 
-systemRouter.route('sensordata/:queryId/')
+systemRouter.route('/sensordata/:queryId/')
 .put(asyncHandler(updateSensorData))
 
 systemRouter.route('/:queryId')

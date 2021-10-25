@@ -1,4 +1,5 @@
 import { Systems } from '../models/systemSchema.js'
+import { waterLevelWarning } from '../utils/warning.js';
 
 export async function getAllData (req, res, next) {
     Systems.find({})
@@ -23,6 +24,7 @@ export async function addNewSystem (req, res, next) {
 
 export async function updateSensorData (req, res, next) {
     try {
+        console.log("called");
         const selectedSystem = await Systems.findByIdAndUpdate(req.params.queryId, {
             $push: { 
                 temperature: req.body.temperature, 
@@ -33,7 +35,12 @@ export async function updateSensorData (req, res, next) {
                 solutionB: req.body.solutionB
             }
         }, { new: true });
-            if (selectedSystem != null) {
+        
+        if (selectedSystem != null) {
+            if (req.body.waterLevel.value < 100) {
+                console.log("water level is high");
+                waterLevelWarning(req.body.waterLevel.value);
+            }
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(selectedSystem);

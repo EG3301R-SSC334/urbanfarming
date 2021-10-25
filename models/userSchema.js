@@ -12,8 +12,8 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    token: {
-        type: String,
+    pushToken: {
+        type: [String],
         unique: true
     },
     profilePicture: {
