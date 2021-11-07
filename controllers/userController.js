@@ -21,6 +21,7 @@ export async function getAllUsers (req, res, next) {
 export async function addNewUser (req, res, next) {
     try {
         const users = await Users.create(req.body);
+        users.systems = "";
         if (users != null) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
