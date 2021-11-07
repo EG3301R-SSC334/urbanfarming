@@ -2,7 +2,8 @@ import {getAllUsers,
     addNewUser, 
     deleteAllUsers, 
     getUser, 
-    updateUser, 
+    updateUser,
+    addUserSystem, 
 } from '../controllers/userController.js';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
@@ -20,5 +21,7 @@ userRouter.route('/:queryId')
     .put(verifyUser, asyncHandler(updateUser))
     .delete(verifyUser, asyncHandler(deleteAllUsers))
 
+userRouter.route('/:queryId/addsystem')
+    .put(asyncHandler(addUserSystem))
 
 export default userRouter;
